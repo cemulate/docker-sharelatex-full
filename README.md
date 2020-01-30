@@ -9,47 +9,5 @@ Tags of this image on Docker Hub are precicely the same as the `sharelatex/share
 
 ## Usage
 
-Here's an example `docker-compose.yml` file to use this image:
-
-```
-version: '2'
-services:
-    sharelatex:
-        restart: always
-        image: cemulate/sharelatex-full:v1.2.1
-        depends_on:
-            - mongo
-            - redis
-        privileged: true
-        ports:
-            - 5000:80
-        links:
-            - mongo
-            - redis
-        volumes:
-            - ./sharelatex_data:/var/lib/sharelatex
-            - ./sharelatex_files:/tmp/files
-        environment:
-            SHARELATEX_MONGO_URL: mongodb://mongo/sharelatex
-            SHARELATEX_REDIS_HOST: redis
-            SHARELATEX_APP_NAME: Our ShareLaTeX
-
-    mongo:
-        restart: always
-        image: mongo
-        expose:
-            - 27017
-        volumes:
-            - ./mongo_data:/data/db
-            - ./mongo_configdb:/data/configdb
-
-    redis:
-        restart: always
-        image: redis
-        expose:
-            - 6379
-        volumes:
-            - ./redis_data:/data
-```
-
-Note the volumes will need to be created in the same directory before hand.
+Overleaf's [Quick start guide](https://github.com/overleaf/overleaf/wiki/Quick-Start-Guide) contains a [docker-compose.yml](https://github.com/overleaf/overleaf/blob/master/docker-compose.yml) file that acts as a great start to use the sharelatex image. 
+Simply replace the sharelatex image with this one to get the full version.
